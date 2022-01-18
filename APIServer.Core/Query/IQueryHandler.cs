@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace APIServer.Application.Core.Query
+namespace APIServer.Core.Query
 {
     public interface IQueryHandler
     {

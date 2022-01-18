@@ -1,6 +1,13 @@
 ﻿using APIServer.Application.Core;
+using APIServer.Application.Core.Commands;
+using APIServer.Application.Core.Exceptions;
+using APIServer.Application.Core.Query;
+using APIServer.Application.Query.Providers;
 using APIServer.Application.WebAPI.Models;
-using MediatR;
+using APIServer.Core.Commands;
+using APIServer.Core.Exceptions;
+using APIServer.Core.Query;
+using APIServer.Query.Handlers.Questions.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,11 +22,13 @@ namespace APIServerRepo.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly ICommandBus _commandBus;
+        private readonly IQueryBus _queryBus;
 
-        public QuestionsController(IMediator mediator)
+        public QuestionsController(IQueryBus queryBus, ICommandBus commandBus)
         {
-            _mediator = mediator;
+            _queryBus = queryBus;
+            _commandBus = commandBus;
         }
 
         [HttpGet]
@@ -29,11 +38,11 @@ namespace APIServerRepo.Controllers
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] GetAllQuestionsWithParameters parametersModel)
         {
-            var response = await _mediator.Send(new GetQuestionsQuery(requestModel.Offset, requestModel.Limit, requestModel.Filter));
+            var response = await _queryBus.Send<GetQuestionsQuery, Task<List<QuestionDto>>>(new GetQuestionsQuery( parametersModel.Limit, parametersModel.Offset, parametersModel.Filter));
 
-            if (response == null)
+            if (!response.Any())
             {
-                return NotFound();
+                return NotFound(ErrorMessage("validationError", "There are no Questions"));
             }
 
             return Ok(response);

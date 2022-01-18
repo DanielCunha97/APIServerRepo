@@ -29,6 +29,7 @@ namespace APIServerRepo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerDocumentation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +50,8 @@ namespace APIServerRepo
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwaggerDocumentation();
         }
     }
 }

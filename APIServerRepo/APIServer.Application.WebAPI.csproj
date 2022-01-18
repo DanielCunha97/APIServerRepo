@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APIServer.Application.Core\APIServer.Application.Core.csproj" />
+    <ProjectReference Include="..\APIServer.Core\APIServer.Core.csproj" />
+    <ProjectReference Include="..\APIServer.Query\APIServer.Query.csproj" />
   </ItemGroup>
 
 

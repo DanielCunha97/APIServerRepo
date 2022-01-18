@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APIServer.Application.Persistence.Query
+namespace APIServer.Persistence.Query
 {
     public class QuestionProvider : IQuestionProvider
     {
-        public Task<List<QuestionDto>> GetAllAsync()
+        public Task<List<QuestionDto>> GetAllAsync(Tuple<int, int, string> parameters)
         {
             // criar resource no azure
             // criar app service no azure

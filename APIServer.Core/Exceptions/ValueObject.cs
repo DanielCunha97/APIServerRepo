@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace APIServer.Application.Core.Exceptions
+namespace APIServer.Core.Exceptions
 {
     public abstract class ValueObject
     {

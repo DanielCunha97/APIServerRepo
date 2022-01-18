@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace APIServer.Application.Core.Exceptions
+namespace APIServer.Core.Exceptions
 {
     public class ErrorMessage : ValueObject
     {

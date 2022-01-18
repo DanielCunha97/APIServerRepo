@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APIServer.Application.Query\APIServer.Application.Query.csproj" />
+    <ProjectReference Include="..\APIServer.Query\APIServer.Query.csproj" />
   </ItemGroup>
 
 </Project>
