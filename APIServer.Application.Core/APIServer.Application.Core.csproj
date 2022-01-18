@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\APIServer.Application.Query\APIServer.Application.Query.csproj" />
-  </ItemGroup>
-
 </Project>
