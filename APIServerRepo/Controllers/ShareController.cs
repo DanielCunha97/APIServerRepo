@@ -19,7 +19,7 @@ namespace APIServerRepo.Controllers
         }
 
         [HttpGet("test")]
-        [ProducesResponseType(typeof(GetAllQuestionsWithParametersResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GenericQuestionsResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.InternalServerError)]

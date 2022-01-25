@@ -10,6 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using APIServer.Core.Commands;
+using APIServer.Command.Questions.Commands;
+using APIServer.Command.Questions.CommandHandlers;
+using APIServer.Domain.Persistence;
+using APIServer.Persistence.Repositories;
+using APIServer.Persistence;
 
 namespace APIServer.Application.Core.Configs
 {
@@ -26,7 +32,11 @@ namespace APIServer.Application.Core.Configs
             // Config our commandHandlers/queryHandlers
             services
                 // Questions           
-                .AddScoped<IQueryHandler<GetQuestionsQuery, Task<List<QuestionDto>>>, QuestionsQueryHandler>();
+                .AddScoped<IQueryHandler<GetQuestionsQuery, Task<List<QuestionDto>>>, QuestionsQueryHandler>()
+                .AddScoped<IQueryHandler<GetQuestionByIdQuery, Task<QuestionDto>>, QuestionsQueryHandler>()
+                .AddScoped<ICommandHandler<CreateQuestionCommand>, QuestionsCommandHandler>()
+                .AddScoped<ICommandHandler<UpdateQuestionCommand>, QuestionsCommandHandler>();
+            
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
@@ -40,6 +50,9 @@ namespace APIServer.Application.Core.Configs
                 ServiceLifetime.Transient);
 
             services.AddScoped<IQuestionProvider, QuestionProvider>();
+            services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

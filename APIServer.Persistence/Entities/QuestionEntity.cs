@@ -1,6 +1,8 @@
-﻿using APIServer.Domain.QuestionAggregate;
+﻿using APIServer.Domain.ChoiceAggregate;
+using APIServer.Domain.QuestionAggregate;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace APIServer.Persistence.Entities
@@ -34,6 +36,14 @@ namespace APIServer.Persistence.Entities
         public IList<ChoiceEntity> Choices
         {
             get; set;
+        }
+
+        public IEnumerable<IChoiceStoreObject> ChoiceStoreObjects 
+        {
+            get
+            {
+                return this.Choices.OfType<IChoiceStoreObject>();
+            }
         }
     }
 }

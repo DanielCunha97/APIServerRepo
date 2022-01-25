@@ -28,9 +28,13 @@ namespace APIServer.Persistence.Query
             return dtos.Select(it => Convert(it)).ToList();
         }
 
-        public Task<QuestionDto> GetAsync(string questionId)
+        public async virtual Task<QuestionDto> GetAsync(Guid questionId)
         {
-            throw new NotImplementedException();
+            var dtos = await _dataContext
+                .Set<QuestionEntity>()
+                .Include(it => it.Choices).ToListAsync();
+
+            return dtos.Select(it => Convert(it)).Where(it => it.Id.Equals(questionId)).FirstOrDefault();
         }
 
         protected virtual QuestionDto Convert(QuestionEntity question)

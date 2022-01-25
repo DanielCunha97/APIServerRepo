@@ -2,6 +2,8 @@
 using APIServer.Core.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +16,24 @@ namespace APIServerRepo.Controllers
     [ApiController]
     public class HealthController : ControllerBase
     {
-        public HealthController()
+        private readonly ILogger<HealthController> _logger;
+        private readonly HealthCheckService _service;
+
+        public HealthController(ILogger<HealthController> logger, HealthCheckService service)
         {
+            _logger = logger;
+            _service = service;
         }
 
-        [HttpGet("test")]
-        [ProducesResponseType(typeof(GetAllQuestionsWithParametersResponse), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromQuery] GetAllQuestionsWithParameters parametersModel)
+        [HttpGet]
+        [ProducesResponseType(typeof(CheckHealthResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(HealthReport), (int)HttpStatusCode.ServiceUnavailable)]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var report = await _service.CheckHealthAsync();
+            _logger.LogInformation($"Get Health Information: {report}");
+
+            return report.Status == HealthStatus.Healthy ? Ok(new CheckHealthResponse { Status = HttpStatusCode.OK.ToString()}) : StatusCode((int)HttpStatusCode.ServiceUnavailable, report);
         }
     }
 }

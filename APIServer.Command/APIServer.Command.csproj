@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\APIServer.Core\APIServer.Core.csproj" />
+    <ProjectReference Include="..\APIServer.Domain\APIServer.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
