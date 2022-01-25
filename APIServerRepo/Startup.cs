@@ -61,6 +61,7 @@ namespace APIServerRepo
                 options.AddPolicy("AllowAll", corsBuilder.Build());
             });
             DIConfig.ConfigureServices(services, Configuration);
+            services.AddHealthChecks();
             services
                 .AddScoped<ICommandBus>(it =>
                 {
@@ -120,7 +121,7 @@ namespace APIServerRepo
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = string.Empty;
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
             });
 
             app.UseIpRateLimiting();

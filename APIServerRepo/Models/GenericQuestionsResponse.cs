@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace APIServer.Application.WebAPI.Models
 {
-    public class GetAllQuestionsWithParametersResponse
+    public class GenericQuestionsResponse
     {
         public IList<QuestionModel> Property1
         {

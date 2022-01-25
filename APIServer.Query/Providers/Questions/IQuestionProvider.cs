@@ -9,6 +9,6 @@ namespace APIServer.Application.Query.Providers
     {
         Task<List<QuestionDto>> GetAllAsync(Tuple<int, int, string> parameters);
 
-        Task<QuestionDto> GetAsync(string questionId);
+        Task<QuestionDto> GetAsync(Guid questionId);
     }
 }
