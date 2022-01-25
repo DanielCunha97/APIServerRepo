@@ -1,8 +1,4 @@
-﻿using APIServer.Application.Core;
-using APIServer.Application.Core.Commands;
-using APIServer.Application.Core.Exceptions;
-using APIServer.Application.Core.Query;
-using APIServer.Application.Query.Providers;
+﻿using APIServer.Application.Query.Providers;
 using APIServer.Application.WebAPI.Models;
 using APIServer.Core.Commands;
 using APIServer.Core.Exceptions;
@@ -18,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace APIServerRepo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/questions")]
     [ApiController]
     public class QuestionsController : ControllerBase
     {
@@ -31,7 +27,7 @@ namespace APIServerRepo.Controllers
             _commandBus = commandBus;
         }
 
-        [HttpGet]
+        [HttpGet("test")]
         [ProducesResponseType(typeof(GetAllQuestionsWithParametersResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
@@ -42,7 +38,7 @@ namespace APIServerRepo.Controllers
 
             if (!response.Any())
             {
-                return NotFound(ErrorMessage("validationError", "There are no Questions"));
+                return NotFound(new ErrorMessage("validationError", "There are no Questions"));
             }
 
             return Ok(response);

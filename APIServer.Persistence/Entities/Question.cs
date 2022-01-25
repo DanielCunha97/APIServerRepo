@@ -1,12 +1,16 @@
-﻿using APIServer.Query.Providers;
+﻿using APIServer.Domain.QuestionAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace APIServer.Application.Query.Providers
+namespace APIServer.Persistence.Entities
 {
-    public class QuestionDto
+    public class Question : IQuestionStoreObject
     {
+        public Question()
+        {
+            this.Choices = new List<Choice>();
+        }
         public Guid Id
         {
             get; set;
@@ -27,7 +31,7 @@ namespace APIServer.Application.Query.Providers
         {
             get; set;
         }
-        public IList<ChoiceDto> Choices
+        public IList<Choice> Choices
         {
             get; set;
         }

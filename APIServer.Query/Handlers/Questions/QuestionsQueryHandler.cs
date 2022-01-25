@@ -20,10 +20,9 @@ namespace APIServer.Application.Query.Handlers.Questions
 
         public async virtual Task<List<QuestionDto>> Handle(GetQuestionsQuery query)
         {
-           // Tuple<> parameters = new Tuple<T1>;
-           // var questions = await _questionProvider.GetAllAsync();
-
-          //  return questions;
+           Tuple<int, int, string> parameters = new Tuple<int, int, string>(query.Limit, query.Offset, query.Filter);
+           var questions = await _questionProvider.GetAllAsync(parameters);
+           return questions;
         }
     }
 }

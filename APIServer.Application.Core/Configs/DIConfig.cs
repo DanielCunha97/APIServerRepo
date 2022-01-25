@@ -1,11 +1,12 @@
 ﻿using APIServer.Application.Query.Handlers.Questions;
 using APIServer.Application.Query.Providers;
 using APIServer.Core.Query;
+using APIServer.Persistence.Context;
 using APIServer.Persistence.Query;
 using APIServer.Query.Handlers.Questions.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,12 +31,11 @@ namespace APIServer.Application.Core.Configs
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SubbyDataContext>(
+            services.AddDbContext<ApplicationContext>(
                 options =>
                 {
                     options
-                    // .UseLazyLoadingProxies()
-                    .UseSqlServer(configuration.GetConnectionString("Subscription"), opt => opt.EnableRetryOnFailure(3));
+                    .UseSqlServer(configuration.GetConnectionString("DbConfig"), opt => opt.EnableRetryOnFailure(3));
                 },
                 ServiceLifetime.Transient);
 
