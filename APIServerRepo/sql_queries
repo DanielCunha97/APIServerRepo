@@ -1,0 +1,67 @@
+Create TABLE Question (
+    QuestionID UNIQUEIDENTIFIER,
+    Question varchar(255),
+    ImageUrl varchar(255),
+    Thumb_url varchar(255),
+	[PublishedAt] datetime2 NOT NULL,
+	CONSTRAINT [PK_Questions] PRIMARY KEY ([QuestionID])
+);
+
+CREATE TABLE Choice (
+    ChoiceID UNIQUEIDENTIFIER,
+    Choice varchar(255),
+    Votes int,
+	Question_ID UNIQUEIDENTIFIER,
+	CONSTRAINT [PK_Choices] PRIMARY KEY ([ChoiceID]),
+	CONSTRAINT FK_Choices FOREIGN KEY (Question_ID) REFERENCES Question(QuestionID)
+);
+
+INSERT INTO [dbo].[Question] ([QuestionID], [Question], [ImageUrl], [Thumb_Url], [PublishedAt]) VALUES 
+    ('7bceb39b-4174-4dfa-8b72-0cd9f2943193', 'Favourite programming language?', 'https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)', 'https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)', '2015-08-05T08:40:51.620Z')
+;
+GO
+
+INSERT INTO [dbo].[Choice] ([ChoiceID], [Choice], [Votes], [Question_ID]) VALUES 
+    ('126cefd9-6595-4846-9eb1-92ac47a29b8d', 'Swift', 2048, '7bceb39b-4174-4dfa-8b72-0cd9f2943193'),
+    ('6e56ff8c-a199-408d-9651-8714e8cd0cd1', 'Python', 1024, '7bceb39b-4174-4dfa-8b72-0cd9f2943193'),
+    ('691d10e7-c941-4269-ac57-8687567ffd9e', 'Objective-C', 512, '7bceb39b-4174-4dfa-8b72-0cd9f2943193'),
+    ('b4a5995e-eec6-4ec0-93af-910191b451d2', 'Ruby', 256, '7bceb39b-4174-4dfa-8b72-0cd9f2943193')
+;
+GO
+----------------------------------------------------------
+CREATE PROCEDURE InsertQuestion 
+       @QuestionID                      NVARCHAR(50)  = NULL   , 
+       @Question                   NVARCHAR(50)      = NULL   , 
+       @ImageUrl                       NVARCHAR(50)  = NULL   , 
+       @Thumb_Url               NVARCHAR(50)  = NULL  ,
+			 @PublishedAt 				datetime2
+AS 
+BEGIN 
+     INSERT INTO [dbo].[Question] (QuestionID, Question, ImageUrl, Thumb_Url, PublishedAt) 
+		 VALUES 
+    (@QuestionID, @Question, @ImageUrl, @Thumb_Url, @PublishedAt)
+END 
+
+CREATE PROCEDURE InsertChoice
+       @ChoiceID                      NVARCHAR(50)  = NULL   , 
+       @Choice                   NVARCHAR(50)      = NULL   , 
+       @Votes                       int  = NULL   , 
+       @Question_ID               NVARCHAR(50)  = NULL
+AS 
+BEGIN 
+INSERT INTO [dbo].[Choice] ([ChoiceID], [Choice], [Votes], [Question_ID]) VALUES 
+    (@ChoiceID, @Choice , @Votes, @Question_ID )
+END 
+
+CREATE PROCEDURE SelectQuestion
+       @QuestionID                      NVARCHAR(50)  = NULL
+AS 
+BEGIN 
+	SELECT * from [dbo].[Question] where QuestionID = @QuestionID;
+END 
+
+CREATE PROCEDURE SelectAllQuestions
+AS 
+BEGIN 
+	SELECT * from [dbo].[Question];
+END 
