@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APIServer.Domain.ChoiceAggregate;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +26,11 @@ namespace APIServer.Domain.QuestionAggregate
         DateTime PublishedAt
         {
             get; 
+        }
+
+        IEnumerable<IChoiceStoreObject> ChoiceStoreObjects
+        {
+            get;
         }
     }
 }
