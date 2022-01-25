@@ -4,20 +4,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace APIServer.Persistence.EntityMappings
 {
-    public class QuestionEntityMapping : IEntityTypeConfiguration<Question>
+    public class QuestionEntityMapping : IEntityTypeConfiguration<QuestionEntity>
     {
-        public virtual void Configure(EntityTypeBuilder<Question> builder)
+        public virtual void Configure(EntityTypeBuilder<QuestionEntity> builder)
         {
             builder.ToTable("Question");
-            builder.HasKey(it => it.Id);
-            builder.Property(it => it.Image_url)
+            builder.HasKey(it => it.QuestionID);
+            builder.Property(it => it.ImageUrl)
                 .HasMaxLength(300);
-            builder.Property(it => it.QuestionText)
+            builder.Property(it => it.Question)
                 .HasMaxLength(200);
+            builder.HasIndex(it => it.Thumb_url);
             builder.HasMany(it => it.Choices)
                 .WithOne(it => it.Question)
-                .HasForeignKey(it => it.Id);
-            builder.HasIndex(it => it.Thumb_url);
+                .HasForeignKey(it => it.Question_ID);
+           
         }
     }
 }

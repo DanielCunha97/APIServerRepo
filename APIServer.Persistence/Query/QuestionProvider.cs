@@ -22,7 +22,7 @@ namespace APIServer.Persistence.Query
         public async virtual Task<List<QuestionDto>> GetAllAsync(Tuple<int, int, string> parameters)
         {
             var dtos = await _dataContext
-                .Set<Question>()
+                .Set<QuestionEntity>()
                 .Include(it => it.Choices).ToListAsync();
 
             return dtos.Select(it => Convert(it)).ToList();
@@ -33,20 +33,20 @@ namespace APIServer.Persistence.Query
             throw new NotImplementedException();
         }
 
-        protected virtual QuestionDto Convert(Question question)
+        protected virtual QuestionDto Convert(QuestionEntity question)
         {
             var dto = new QuestionDto
             {
-                Id = question.Id,
+                Id = question.QuestionID,
                 Choices = question.Choices.Select(it => new APIServer.Query.Providers.ChoiceDto
                 { 
-                    ChoiceText = it.ChoiceText,
-                    Id = it.Id,
+                    ChoiceText = it.Choice,
+                    Id = it.ChoiceID,
                     Votes = it.Votes
                 }).ToList(),
-                Image_url = question.Image_url,
-                Published_at = question.Published_at,
-                QuestionText = question.QuestionText,
+                Image_url = question.ImageUrl,
+                Published_at = question.PublishedAt,
+                QuestionText = question.Question,
                 Thumb_url = question.Thumb_url
             };
 

@@ -5,21 +5,21 @@ using System.Text;
 
 namespace APIServer.Persistence.Entities
 {
-    public class Question : IQuestionStoreObject
+    public class QuestionEntity : IQuestionStoreObject
     {
-        public Question()
+        public QuestionEntity()
         {
-            this.Choices = new List<Choice>();
+            this.Choices = new List<ChoiceEntity>();
         }
-        public Guid Id
-        {
-            get; set;
-        }
-        public string QuestionText
+        public Guid QuestionID
         {
             get; set;
         }
-        public string Image_url
+        public string Question
+        {
+            get; set;
+        }
+        public string ImageUrl
         {
             get; set;
         }
@@ -27,11 +27,11 @@ namespace APIServer.Persistence.Entities
         {
             get; set;
         }
-        public DateTime Published_at
+        public DateTime PublishedAt
         {
             get; set;
         }
-        public IList<Choice> Choices
+        public IList<ChoiceEntity> Choices
         {
             get; set;
         }

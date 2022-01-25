@@ -5,14 +5,14 @@ using System.Text;
 
 namespace APIServer.Persistence.Entities
 {
-    public class Choice : IChoiceStoreObject
+    public class ChoiceEntity : IChoiceStoreObject
     {
-        public Guid Id
+        public Guid ChoiceID
         {
             get; set;
         }
 
-        public string ChoiceText
+        public string Choice
         {
             get; set;
         }
@@ -21,7 +21,12 @@ namespace APIServer.Persistence.Entities
             get; set;
         }
 
-        public virtual Question Question
+        public Guid Question_ID
+        {
+            get; set;
+        }
+
+        public virtual QuestionEntity Question
         {
             get; set;
         }

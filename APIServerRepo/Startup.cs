@@ -76,7 +76,7 @@ namespace APIServerRepo
             // Add Swagger UI.
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("Bliss Recruitment challenge", new OpenApiInfo { Title = "Recruitment API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Recruitment API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -114,7 +114,6 @@ namespace APIServerRepo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseCors("AllowAll");
             // swagger
             app.UseSwagger();

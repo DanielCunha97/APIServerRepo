@@ -6,12 +6,12 @@ namespace APIServer.Domain.ChoiceAggregate
 {
     public interface IChoiceStoreObject
     {
-        Guid Id
+        Guid ChoiceID
         {
             get;
         }
 
-        string ChoiceText
+        string Choice
         {
             get; 
         }

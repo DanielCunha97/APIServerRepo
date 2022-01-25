@@ -6,15 +6,15 @@ namespace APIServer.Domain.QuestionAggregate
 {
     public interface IQuestionStoreObject
     {
-        Guid Id
+        Guid QuestionID
         {
             get;
         }
-        string QuestionText
+        string Question
         {
             get;
         }
-        string Image_url
+        string ImageUrl
         {
             get;
         }
@@ -22,7 +22,7 @@ namespace APIServer.Domain.QuestionAggregate
         {
             get;
         }
-        DateTime Published_at
+        DateTime PublishedAt
         {
             get; 
         }
