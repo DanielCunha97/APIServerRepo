@@ -1,8 +1,11 @@
 using APIServer.Application.Core.Configs;
 using APIServer.Core.Commands;
 using APIServer.Core.Query;
+using APIServer.Domain;
+using APIServer.Persistence;
 using APIServerRepo.Swagger;
 using AspNetCoreRateLimit;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -46,7 +49,8 @@ namespace APIServerRepo
                 {
                     jsonOptions.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ShareEmailValidator>());
 
             // Get client IP
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -60,7 +64,12 @@ namespace APIServerRepo
             {
                 options.AddPolicy("AllowAll", corsBuilder.Build());
             });
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             DIConfig.ConfigureServices(services, Configuration);
+            
+            
+            
             services.AddHealthChecks();
             services
                 .AddScoped<ICommandBus>(it =>

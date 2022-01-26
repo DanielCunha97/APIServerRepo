@@ -16,6 +16,8 @@ using APIServer.Command.Questions.CommandHandlers;
 using APIServer.Domain.Persistence;
 using APIServer.Persistence.Repositories;
 using APIServer.Persistence;
+using APIServer.Command.Share.CommandHandlers;
+using APIServer.Command.Share.Commands;
 
 namespace APIServer.Application.Core.Configs
 {
@@ -35,8 +37,9 @@ namespace APIServer.Application.Core.Configs
                 .AddScoped<IQueryHandler<GetQuestionsQuery, Task<List<QuestionDto>>>, QuestionsQueryHandler>()
                 .AddScoped<IQueryHandler<GetQuestionByIdQuery, Task<QuestionDto>>, QuestionsQueryHandler>()
                 .AddScoped<ICommandHandler<CreateQuestionCommand>, QuestionsCommandHandler>()
-                .AddScoped<ICommandHandler<UpdateQuestionCommand>, QuestionsCommandHandler>();
-            
+                .AddScoped<ICommandHandler<UpdateQuestionCommand>, QuestionsCommandHandler>()
+                // Share
+                .AddScoped<ICommandHandler<ShareEmailCommand>, ShareCommandHandler>();
         }
 
         private static void ConfigurePersistence(IServiceCollection services, IConfiguration configuration)
@@ -51,7 +54,7 @@ namespace APIServer.Application.Core.Configs
 
             services.AddScoped<IQuestionProvider, QuestionProvider>();
             services.AddScoped<IQuestionsRepository, QuestionsRepository>();
-
+            services.AddScoped<IShareRepository, ShareRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer.Application.WebAP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{1690DCA5-180C-47FF-8B7F-474523C4E46F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F58B018A-F8B2-4ACF-AFF4-D7C24A5D55F7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{F58B018A-F8B2-4ACF-AFF4-D7C24A5D55F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer.Application.WebAPI.Tests", "APIServer.Application.WebAPI.Tests\APIServer.Application.WebAPI.Tests.csproj", "{8135AAA7-18D9-45E9-8EF0-7A7FD71993B2}"
 EndProject
@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer.Core", "APIServer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer.Command", "APIServer.Command\APIServer.Command.csproj", "{A9090B5D-A1AC-418E-9C5C-19EB2C0D1973}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIServer.Application.Core", "APIServer.Application.Core\APIServer.Application.Core.csproj", "{1F084368-F972-4CAC-823B-A969AA477540}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer.Application.Core", "APIServer.Application.Core\APIServer.Application.Core.csproj", "{1F084368-F972-4CAC-823B-A969AA477540}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
